@@ -1,0 +1,18 @@
+each item in items
+  tr(onclick="app.goto('equipment/" + item.id + "')")
+    td 
+      img(src=app.thumbnail(item.image))
+    td.full 
+      .name= item.name
+      | !{app.schedule.boxTemplate(item)}
+      .trip-details
+        .totalTime 
+          .icon.icon-time
+          .time !{msToHm(item.totalTime)}
+        .totalUses 
+          .icon.icon-trip
+          | #{item.totalUses}
+      if item.attachedTo
+        .attached
+          img(src=app.thumbnail(item.attachedTo.image, 40))
+          .attached-name= item.attachedTo.name

@@ -1,0 +1,39 @@
+.scan
+  background #222
+  .header
+    display flex
+    .logo
+      flex 1
+    .scanned
+      margin-top .5em
+      flex 1
+      position relative
+      h4
+        margin 0
+      .item
+        width 100%
+        display flex
+        position relative
+        .img
+          margin-right .2em
+        .name
+          overflow hidden
+          text-overflow ellipsis
+          white-space nowrap
+          width calc(100% - 3em)
+      .more
+        display flex
+        justify-content flex-end
+  video
+    width 100%
+    height 100%
+    
+.scan-success, .scan-queue, .scan-result, .item-select
+  .item
+    display flex
+    margin-bottom .5em
+    .name
+      margin-left .5em
+      font-weight bold
+  .continue
+    padding 1em

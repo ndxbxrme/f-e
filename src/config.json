@@ -1,0 +1,15 @@
+{
+  "api": {
+    "url": "https://i33ec9ecgk.execute-api.eu-west-1.amazonaws.com/dev/" 
+  },
+  "cognito": {
+    "region": "eu-west-1",
+    "userPoolId": "eu-west-1_WebtZ8yeL",
+    "userPoolWebClientId": "1tt222d1e3b3koss1g8v4jrb0"
+  },
+  "cloudinary": {
+    "url": "https://api.cloudinary.com/v1_1/du1nzd9pt/image/upload",
+    "imageUrl": "https://res.cloudinary.com/du1nzd9pt/image/upload",
+    "uploadPreset": "dyzcfloi"
+  }
+}

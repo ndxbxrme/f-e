@@ -1,0 +1,18 @@
+.page-title
+  h1 Edit
+  if item.id
+    button(onclick='app.delete()') Delete
+form.card(onsubmit='app.submit();return false')
+  input(type='hidden', name='id', value=item.id)
+  .form-item
+    label Name
+    input.name(type='text', name='name', value=item.name)
+  .advanced
+    .form-item
+      label Total uses
+      input.uses(type='number', name='totalUses', value=(item.totalUses || 0))
+    .form-item
+      label Total time (Ms)
+      input.uses(type='number', name='totalTime', value=(item.totalTime || 0))
+  .uploader !{app.imageUploader.template({image:item.image})}
+  input(type='submit', value='Submit')

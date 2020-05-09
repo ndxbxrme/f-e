@@ -1,0 +1,3 @@
+img.uploadImage(src=(app.thumbnail(image) || (require('./upload.png').default)))
+input(type='file', onchange='app.imageUploader.upload()')
+input#image(type='hidden', name='image', value=image)

@@ -1,0 +1,35 @@
+h2 Needing maintenance
+table
+  tr
+    th
+    th
+    th.r Hours remaining
+    th.r Schedule hours
+  each item in needsMaintenance
+    tr(onclick='app.goto("equipment/' + item.id + '")')
+      td
+        img(src=app.thumbnail(item.image, 60))
+      td.half
+        .name= item.name
+        | !{app.schedule.boxTemplate(item)}
+      td.r= msToHm(item.timeLeft)
+      td.r= msToHm(item.scheduleMs)
+h2 Currently in use
+table
+  tr
+    th
+    th
+    th
+    th
+    th.r Start time
+  each item in currentEvents
+    tr
+      td
+        img(src=app.thumbnail(item.image, 60))
+      td.half(onclick='app.goto("equipment/' + item.id + '")')
+        .name= item.name
+        | !{app.schedule.boxTemplate(item)}
+      td
+        img(src=app.thumbnail(item.attachedTo.image, 60))
+      td.name(onclick='app.goto("person/' + item.attachedTo.id + '")')= item.attachedTo.name
+      td.date.r= app.dateFormat.dateTime(item.attachedDate)

@@ -1,0 +1,9 @@
+.equipment-list
+  | !{app.templates.header({page:'Equipment'})}
+  .body
+    .page-title
+      input(type='text', placeholder='Search...', onchange='app.search(this.value)', onkeyup='app.search(this.value)')
+      button.round(onclick='app.goto("equipment")')
+        .icon.icon-new
+    table
+  .footer !{app.templates.nav()}

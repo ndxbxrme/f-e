@@ -1,0 +1,25 @@
+.scan
+  .body
+    .header
+      .logo 
+        .farm-logo.white(onclick='app.goto("")')
+        .title
+          .app-name Logo
+          .page-name Scan
+      .scanned(onclick='app.goto("scanned")')
+        each item, i in app.storage.getScanned()
+          if i == 0
+            h4 Scanned
+          if i < 2
+            .item
+              .img
+                img(src=app.thumbnail(item.image, 30))
+              .name= item.name
+          if i == 2
+            .more More...
+    video#video
+    .current
+      - if(app.current)
+        img(src=thumnbnail)
+        .name= name
+  .footer !{app.templates.nav()}

@@ -1,0 +1,30 @@
+.page-title
+  h1 Edit
+  if item.id
+    button(onclick='app.delete()') Delete
+form.card(onsubmit='app.submit();return false')
+  input(type='hidden', name='id', value=item.id)
+  .form-item
+    label Name
+    input.name(type='text', name='name', value=item.name)
+  .advanced
+    .form-item
+      label Total uses
+      input.uses(type='number', name='totalUses', value=(item.totalUses || 0))
+    .form-item
+      label Current uses
+      input.uses(type='number', name='currentUses', value=(item.currentUses || 0))
+    .form-item
+      label Total time (Ms)
+      input.uses(type='number', name='totalTime', value=(item.totalTime || 0))
+    .form-item
+      label Current time (Ms)
+      input.uses(type='number', name='currentTime', value=(item.currentTime || 0))
+    .form-item
+      label Maintenance schedule (Hrs)
+      input.schedule(type='number', name='schedule', value=(item.schedule || 0))
+    .form-item
+      label Last maintenance date
+      input.lastMaintenance(type='date', name='lastMaintenance', value=(item.lastMaintenance || 0))
+  .uploader !{app.imageUploader.template({image:item.image})}
+  input(type='submit', value='Submit')

@@ -1,0 +1,18 @@
+.signin
+  form(onsubmit='app.signin.submit(event); return false', novalidate)
+    h3 Sign in
+    .error-message
+    label Username
+    .error.username-required Please enter a username
+    input.username(name='username', type='text', required)
+    label Password
+    .error.password-required Please enter a password
+    input.password(name='password', type='password', required)
+    .new
+      label Select a new password
+      .error.newPassword-password Password must be more than 8 characters, containing upper and lowercase letters with at least one special character
+      input.newPassword(name='newPassword', type='password')
+      label Confirm password
+      .error.newPasswordConfirm-confirm Passwords must match
+      input.newPasswordConfirm(name='newPasswordConfirm', type='password')
+    input(type='submit', value='submit')

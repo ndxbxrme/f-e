@@ -1,0 +1,33 @@
+.equipment-details
+  .data
+    h3 #{item.name}
+    .img-edit
+      .img
+        img.thumbnail(src=app.thumbnail(item.image))
+      .edit
+        button(onclick='app.edit()') Edit
+    .totalUses 
+      .icon.icon-trip
+      | No events: #{item.totalUses}
+    .totalTime 
+      .icon.icon-time
+      | Total time: !{msToHm(item.totalTime)}
+  .qr
+    canvas.qrcode
+.maintenance
+  h4 Maintenance condition
+  .maintenance-details
+    | !{app.schedule.boxTemplate(item)}
+    button(onclick='app.maintenance()') Maintain
+if item.attachedTo
+  .attached
+    h4 Currently being used by
+    .attached-details
+      .img
+        img(src=app.thumbnail(item.attachedTo.image, 60))
+      .name= item.attachedTo.name
+      .date= app.dateFormat.dateTime(item.attachedDate)
+.charts
+  .chart-month
+  .chart-people
+button(onclick='app.delete()') Delete

@@ -1,0 +1,5 @@
+each month, key in items
+  .chart-row
+    label= key
+    .chart-bar-box
+      .chart-bar(style='height: ' + month.percent + '%; top: ' + (100 - month.percent) + '%')

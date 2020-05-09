@@ -1,0 +1,13 @@
+.scan-success
+  if finished==="0"
+    h1 Signed out
+  else
+    h1 Signed in
+  h3 Equipment
+  .item
+    img(src=app.thumbnail(equipment.image))
+    h2= equipment.name
+  h3 Person
+  .item
+    img(src=app.thumbnail(person.image))
+    h2= person.name

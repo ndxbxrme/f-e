@@ -1,0 +1,24 @@
+.scanned-page
+  | !{app.templates.header({page:'Scanned'})}
+  .body
+    if (myequipment = app.storage.getHistory('equipment')).length
+      .page-title
+        h2 Equipment
+      each item in myequipment
+        .item
+          .img
+            img(src=app.thumbnail(item.image, 60))
+          .name= item.name
+          button(onclick='app.select("' + item.id + '", "equipment")') Select
+          button(onclick='app.remove("' + item.id + '", "equipment")') Remove
+    if (myhistory = app.storage.getHistory('person')).length
+      .page-title
+        h2 People
+      each item in myhistory
+        .item
+          .img
+            img(src=app.thumbnail(item.image, 60))
+          .name= item.name
+          button(onclick='app.select("' + item.id + '", "person")') Select
+          button(onclick='app.remove("' + item.id + '", "person")') Remove
+  .footer !{app.templates.nav()}

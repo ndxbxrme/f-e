@@ -1,0 +1,6 @@
+.scan-queue
+  h2 Added to queue
+  each item in items
+    .item
+      img(src=app.thumbnail(item.image, 60))
+      .name= item.name

@@ -1,0 +1,112 @@
+body
+  &.web
+    overflow-y scroll
+    button.round
+      border-radius 50%
+      background white
+      border 1px solid black
+    .page
+      min-height 100%
+    .page > div:first-of-type
+      min-height 100%
+      height 100%
+      display flex
+      flex-direction column
+      align-items center
+      .header
+        position fixed
+        top 0
+        left 0
+        width 100%
+        height 6em
+        display flex
+        justify-content center
+        background white
+        border-bottom 1px solid #eee
+        z-index 10
+        .wrap
+          width 80%
+          display flex
+          justify-content space-between
+          .logo
+            font-size xx-large
+            display flex
+            align-items center
+            margin-right 2em
+          .nav
+            display flex
+            flex 1
+            max-width 30em
+            button
+              flex 1
+              border none
+              background white
+              cursor pointer
+              &.selected
+                color #458813
+          .name
+            display flex
+            align-items center
+            margin-left 2em
+      .body
+        background white
+        margin-top 6em
+        width 80%
+        padding 1em
+        box-shadow 0px 0px 30px #d4d4d4
+        .page-title
+          display flex
+          justify-content space-between
+        table
+          width 100%
+          tr
+            box-shadow 0 .5em 2px #fafafa
+          th
+            font-size .8em
+            color #999
+            &.r
+              text-align right
+          td
+            padding-top 1em
+            &.r
+              text-align right
+            &.full
+              width 99%
+            &.half
+              width 49%
+            &.name, .name
+              font-weight bold
+            &.date
+              white-space nowrap
+            img
+              box-shadow 0 0 5px #dedede
+              margin-right .5em
+        .images
+          display flex
+          .image
+            flex 1
+            img
+              width 100%
+            canvas
+              width 100%!important
+              height 100%!important
+      .footer
+        background white
+        border-top 1px solid #eee
+        width 100%
+    .chart
+      flex 1
+    .chart-month
+      .chart-row
+        display flex
+        height calc(100% / 12)
+        .chart-bar-box
+          flex 1
+          position relative
+          .chart-bar
+            position absolute
+            top 0
+            left 0
+            height 90%
+            background orange
+            border-bottom 1px solid black

@@ -1,0 +1,10 @@
+.people
+  | !{app.templates.header({page:'People'})}
+  .body
+    .page-title
+      input(type='text', onchange='app.search(this.value)', onkeyup='app.search(this.value)')
+      button.round(onclick='app.goto("person")')
+        .icon.icon-new
+        | New
+    table
+  .footer !{app.templates.nav()}

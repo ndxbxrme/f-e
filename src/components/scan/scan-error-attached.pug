@@ -1,0 +1,9 @@
+h1 Already assigned
+if person.attachedTo
+  h3 Person
+  h2= person.name
+  img(src=app.thumbnail(person.image))
+if equipment.attachedTo
+  h3 Equipment
+  h2= equipment.name
+  img(src=app.thumbnail(equipment.image))

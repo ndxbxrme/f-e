@@ -1,0 +1,7 @@
+.item-select
+  h2 Link with
+  each item in items
+    .item(onclick='app.itemSelect("' + item.id + '")')
+      img(src=app.thumbnail(item.image, 60))
+      .name= item.name
+  button.continue(onclick='app.itemCancel()') Continue scanning...

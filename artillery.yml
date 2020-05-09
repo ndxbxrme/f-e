@@ -1,0 +1,14 @@
+config:
+  target: 'http://localhost:9000'
+  phases:
+    - duration: 10
+      arrivalRate: 1
+scenarios:
+  - flow:
+    - log: "hello"
+    - get:
+      - url: "/"
+        capture:
+          - json: "$"
+            as: "id"
+    - log: "my id is {{id}}"

@@ -1,0 +1,4 @@
+each item in items
+  .img(onclick='app.goto("person/' + item.person.id + '")')
+    img(src=app.thumbnail(item.person.image, 60))
+    

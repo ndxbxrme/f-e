@@ -1,0 +1,105 @@
+body
+  &.mobile
+    h2
+      font-size 1.2em
+    form.card
+      background white
+      padding .5em
+      input[type=submit]
+        display block
+        margin 1em 0
+        padding 1em
+        width 100%
+      .advanced
+        display none
+    .form-item
+      display flex
+      flex-direction column
+      margin-bottom 1em
+      input[type=text], input[type=number], input[type=date]
+        padding 1em
+    .page-title
+      margin 1em 0
+      display flex
+      input[type='text']
+        flex 1
+        padding .8em
+        margin-right 4em
+      h1
+        margin 0
+        flex 1
+    table
+      border-collapse collapse
+      width 100%
+      tr
+        background #eeefef
+      td
+        background white
+        border-bottom .4em solid #eeefef
+        &.full
+          width 99%
+        padding .4em
+        &.r
+          text-align right
+      .name
+        font-weight bold
+      .trip-details
+        display flex
+        margin .4em 0
+        .totalTime
+          flex 1
+          display flex
+        .totalUses
+          flex 1
+          display flex
+      .attached
+        display flex
+        img
+          margin-right .4em
+      .noborder
+        border-bottom none
+      .date-time
+        display flex
+        justify-content space-between
+        align-items baseline
+    .page
+      height 100%
+    .page > div:first-of-type
+      height 100%
+      display flex
+      flex-direction column
+      overflow hidden
+      .header
+        height 8em
+        background #333
+        color white
+        position fixed
+        top 0
+        left 0
+        width 100%
+        transition .2s ease-in
+        transform translate3d(0,0,0)
+        z-index 10
+        .logo
+          display flex
+          align-items center
+          font-size 1.3em
+          transition .2s ease-in
+          height 100%
+          margin 0 1em
+          .farm-logo
+            width 3em
+            height 3em
+          .page-name
+            color #7483a5
+      .body
+        flex 1
+        overflow-y scroll
+        padding 0 1em
+        padding-top 8em
+    &.scrolled
+      .page > div:first-of-type
+        .header
+          height 4em
+          .logo
+            font-size .8em
