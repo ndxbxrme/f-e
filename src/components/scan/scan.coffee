@@ -5,17 +5,41 @@ codeReader = null
 
 module.exports = (params) ->
   init = ->
-    history = storage.getHistory 'person'
-    await modal.show require('./item-select.pug') items:history
-    
     codeReader = new BrowserQRCodeReader()
     app.current = app.current or {}
     redirect = 'scan'
-    try
-      result = await codeReader.decodeOnceFromVideoDevice undefined, 'video'
+    if /AppleWebKit/.test navigator.userAgent
+      #ios stuff
+      app.onCleanup ->
+        window.webkit.messageHandlers.cameraHandler.postMessage({operation: "stop"})
+      document.querySelector('video').style.display = 'none'
+      img = document.querySelector '.ios'
+      img1 = document.querySelector '.ios1'
+      img1.style.display = 'block'
+      window.webkit.messageHandlers.cameraHandler.postMessage({operation: "start"})
+      getCode = ->
+        new Promise (resolve, reject) ->
+          app.cameraFrame = (data) ->
+            img.src = 'data:image/png;base64,' + data
+            img1.src = 'data:image/png;base64,' + data
+            setTimeout ->
+              try
+                myresult = await codeReader.decodeFromImage(img)
+                window.webkit.messageHandlers.cameraHandler.postMessage({operation: "stop"}) if myresult
+                resolve myresult if myresult
+            , 10
+      result = await getCode()
       result = JSON.parse result
-      await codeReader.stopStreams()
-      document.querySelector('#video').stop()
+      #return
+    else
+      try
+        result = await codeReader.decodeOnceFromVideoDevice undefined, 'video'
+        result = JSON.parse result
+        await codeReader.stopStreams()
+        document.querySelector('#video').stop()
+      catch e
+        document.querySelector('.page').innerHTML = JSON.stringify e
+        return
     if result
       modalHtml = require('./scan-result.pug') item:result
       history = storage.getHistory if result.type is 'person' then 'equipment' else 'person'

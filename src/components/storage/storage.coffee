@@ -20,7 +20,7 @@ module.exports =
       database[item.type].push item
       saveDatabase database
     else
-      throw 'ALREADY EXISTS'
+      throw JSON.stringify filtered
     database[item.type]
   cleanHistory: (items) ->
     database = getDatabase()
@@ -38,7 +38,7 @@ module.exports =
     item[item1.type] = item1
     item[item2.type] = item2
     item.overrideDate = overrideDate?.toISOString()
-    await API.post 'FarmAPI', 'events', 
+    await API.post 'FarmAPI', 'events',
       body: item
   list: (route) ->
     try

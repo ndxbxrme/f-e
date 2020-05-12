@@ -6,14 +6,15 @@
         img.thumbnail(src=app.thumbnail(item.image))
       .edit
         button(onclick='app.edit()') Edit
-    .totalUses 
+    .totalUses
       .icon.icon-trip
       | No events: #{item.totalUses}
-    .totalTime 
+    .totalTime
       .icon.icon-time
       | Total time: !{msToHm(item.totalTime)}
   .qr
-    canvas.qrcode
+    .qr-container
+      canvas.qrcode
 .maintenance
   h4 Maintenance condition
   .maintenance-details

@@ -6,4 +6,4 @@ module.exports =
     clearScroll()
     elm.addEventListener 'scroll', (e) ->
       clearScroll()
-      document.body.className += " scrolled" if @scrollTop > 10
+      document.body.className += " scrolled" if @scrollTop > 20

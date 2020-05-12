@@ -14,7 +14,12 @@ html, body
     vertical-align baseline
   img
     border-radius .3em
-    
+  input, button, textarea {
+    -webkit-appearance none
+    -webkit-border-radius 0px
+    appearance none
+    border-radius 0px
+  }
   &.uploading
     input[type=submit]
       opacity 0.5
@@ -33,9 +38,11 @@ html, body
   .nav
     &.mobile
       display flex
+      background #eeefef
       button
+        margin 0
         flex 1
-        padding 1em
+        padding 1em 0
         font-size 1.2em
         display flex
         align-items center
@@ -46,6 +53,10 @@ html, body
           margin-right .2em
         &.flex-2
           flex 2
+      @media screen and (max-width: 20em)
+        button
+          span
+            display none
   form
     .error
       color red

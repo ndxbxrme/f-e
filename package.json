@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --host 0.0.0.0 --https",
+    "start": "webpack-dev-server --host 0.0.0.0",
     "test": "coffee -o test test && nodeunit test/test.js",
-    "build": "rm -rf dist && webpack --config webpack.prod.js && cp -r public/ dist/",
+    "build": "rm -rf dist && webpack --config webpack.prod.js",
     "deploy": "node deploy.js && rm -rf dist/*.map && aws s3 rm s3://www.rainstormweb.com/farm --recursive && aws s3 sync dist s3://www.rainstormweb.com/farm",
     "replace-android": "replace-in-file href=\"\"\"\"/\"\"\"\" href=\"\"\"\"\"\" android/app/src/main/assets/index.html",
+    "replace-ios": "replace-in-file 'href=\"/\"' 'href=\"\"' ios/RSWebView/App/index.html",
     "android": "npm run build && rm -rf android/app/src/main/assets && cp -r dist android/app/src/main/assets && npm run replace-android && cd android && gradlew installDebug && cd .. && adb shell am start -n com.rainstormweb.farmapp2/.MainActivity",
+    "ios": "npm run build && rm -rf ios/RSWebView/App && cp -r dist ios/RSWebView/App && npm run replace-ios",
     "load": "artillery run artillery.yml"
   },
   "keywords": [],
