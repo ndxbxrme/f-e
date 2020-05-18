@@ -6,7 +6,7 @@ window.msToHm = (time) -> window.msToHms(time).replace(/:\d+$/, '').replace(':',
 mobile = require 'is-mobile'
 
 cleanup = []
-document.body.className += if mobile() then ' mobile' else 'web'
+document.body.className += if mobile() then ' mobile' else ' web'
 page = document.querySelector '.page'
 app = window.app =
   baseURI: document.baseURI.replace(window.location.origin, '')
@@ -17,8 +17,8 @@ app = window.app =
     await fn() for fn in cleanup
     cleanup = []
     [@route, ...@params] = (if @useHash then window.location.hash.replace('#', '').replace(/^\//, '') else window.location.pathname.replace(@baseURI, '')).split /\//g
-    @route = (if ['forgot', 'reset', 'confirm'].includes @route then @route else 'signin') if not @loggedIn
     @route = @route or 'dashboard'
+    [@route, @params] = @permissions.check @route, @params, app.user
     template = @templates[@route] or @templates.dashboard
     controller = @controllers[@route] or @controllers.dashboard
     page.innerHTML = template app: @, ctrl: controller? @params
@@ -35,6 +35,7 @@ app = window.app =
   onCleanup: (fn) ->
     cleanup.push fn
   storage: require './components/storage/storage.coffee'
+  permissions: require './components/permissions/permissions.coffee'
 require('./components.coffee') app
 window.addEventListener 'popstate', -> app.setState()
 main = ->

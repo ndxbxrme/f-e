@@ -1,0 +1,23 @@
+
+.nav
+  &.mobile
+    display flex
+    background #eeefef
+    button
+      margin 0
+      flex 1
+      padding 1em 0
+      font-size 1.2em
+      display flex
+      align-items center
+      justify-content center
+      .icon
+        width 1.9em
+        height 1.9em
+        margin-right .2em
+      &.flex-2
+        flex 2
+    @media screen and (max-width: 20em)
+      button
+        span
+          display none

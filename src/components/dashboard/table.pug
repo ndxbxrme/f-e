@@ -1,35 +1,42 @@
+- now = new Date()
+- lastDate = new Date(now.getFullYear(), now.getMonth() + 1, now.getDate())
 h2 Needing maintenance
 table
-  tr
-    th
-    th
-    th.r Hours remaining
-    th.r Schedule hours
   each item in needsMaintenance
     tr(onclick='app.goto("equipment/' + item.id + '")')
       td
-        img(src=app.thumbnail(item.image, 60))
+        img(src=app.thumbnail(item.image, 50))
       td.half
-        .name= item.name
-        | !{app.schedule.boxTemplate(item)}
-      td.r= msToHm(item.timeLeft)
-      td.r= msToHm(item.scheduleMs)
-h2 Currently in use
-table
-  tr
-    th
-    th
-    th
-    th
-    th.r Start time
+        .equipment-details
+          .name= item.name
+          | !{app.schedule.boxTemplate(item)}
+      td.r !{msToHm(item.timeLeft)}
+      //td.r= msToHm(item.scheduleMs)
+h2 Currently signed out
+.currentEvents
   each item in currentEvents
-    tr
-      td
-        img(src=app.thumbnail(item.image, 60))
-      td.half(onclick='app.goto("equipment/' + item.id + '")')
-        .name= item.name
-        | !{app.schedule.boxTemplate(item)}
-      td
-        img(src=app.thumbnail(item.attachedTo.image, 60))
-      td.name(onclick='app.goto("person/' + item.attachedTo.id + '")')= item.attachedTo.name
-      td.date.r= app.dateFormat.dateTime(item.attachedDate)
+    - if(lastDate.getMonth() != new Date(item.attachedDate).getMonth())
+      - thisDate = new Date(item.attachedDate)
+      .month-year #{thisDate.toGMTString().split(/ /g)[2]} #{thisDate.getFullYear()}
+      - lastDate = thisDate
+    .event-holder
+      .myevent(pan='delete', id='ce_0-' + item.attachedTo.id + '-' + item.id)
+        .date
+          .day
+            .dayname= ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date(item.attachedDate).getDay()]
+            .num= new Date(item.attachedDate).getDate()
+          .time= new Date(item.attachedDate).toLocaleTimeString().replace(/:\d\d$/, '')
+        .myequipment
+          .img
+            img(src=app.thumbnail(item.image, 50))
+          .equipment-details(onclick='app.goto("equipment/' + item.id + '")')
+            .name= item.name
+            | !{app.schedule.boxTemplate(item)}
+        .myperson
+          .img
+            img(src=app.thumbnail(item.attachedTo.image, 50))
+          .name(onclick='app.goto("person/' + item.attachedTo.id + '")')= item.attachedTo.name
+      .controls
+        .button-holder
+          button(onclick='app.signIn("' + item.id + '")') Sign in
+          button(onclick='app.deleteEvent("' + item.id + '")') Delete
