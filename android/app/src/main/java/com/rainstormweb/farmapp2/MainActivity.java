@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         myView.getSettings().setPluginState(WebSettings.PluginState.ON);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             myView.getSettings().setMediaPlaybackRequiresUserGesture(false);
-        //myView.loadUrl("file:///android_asset/index.html");
-        myView.loadUrl("https://192.168.0.2:9000");
+        myView.loadUrl("file:///android_asset/index.html");
+        //myView.loadUrl("https://192.168.0.2:9000");
 
     }
 

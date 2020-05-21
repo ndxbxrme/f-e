@@ -1,5 +1,6 @@
 import './index.styl'
 import {Auth, API} from 'aws-amplify'
+jwtDecode = require 'jwt-decode'
 require './configure-amplify.coffee'
 window.msToHms = require 'ms-to-hms'
 window.msToHm = (time) -> window.msToHms(time).replace(/:\d+$/, '').replace(':', '<sub>h</sub>') + '<sub>m</sub>'
@@ -41,5 +42,6 @@ window.addEventListener 'popstate', -> app.setState()
 main = ->
   try
     app.loggedIn = true if app.user = await Auth.currentAuthenticatedUser()
+    app.user.groups = jwtDecode(app.user.signInUserSession.idToken.jwtToken)["cognito:groups"]
   app.setState()
 main()

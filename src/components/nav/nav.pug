@@ -3,3 +3,5 @@
   button(onclick='app.goto("/events")' class=(['events','event'].includes(app.route)?'selected':'')) Events
   button(onclick='app.goto("/equipment-list")' class=(['equipment-list','equipment'].includes(app.route)?'selected':'')) Equipment
   button(onclick='app.goto("/people")' class=(['people','person'].includes(app.route)?'selected':'')) People
+  if app.permissions.isAdmin()
+    button(onclick='app.goto("/users")' class=(['users','user'].includes(app.route)?'selected':'')) Users
