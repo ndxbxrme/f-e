@@ -1,2 +1,8 @@
 .users
+  | !{app.templates.header({page:'Users'})}
   .body
+    .table
+  if app.isMobile()
+    .footer !{app.templates.nav()}
+  else
+    .footer hey

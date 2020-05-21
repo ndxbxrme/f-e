@@ -1,13 +1,10 @@
 import './index.styl'
 import {Auth, API} from 'aws-amplify'
-jwtDecode = require 'jwt-decode'
 require './configure-amplify.coffee'
 window.msToHms = require 'ms-to-hms'
 window.msToHm = (time) -> window.msToHms(time).replace(/:\d+$/, '').replace(':', '<sub>h</sub>') + '<sub>m</sub>'
-mobile = require 'is-mobile'
 
 cleanup = []
-document.body.className += if mobile() then ' mobile' else ' web'
 page = document.querySelector '.page'
 app = window.app =
   baseURI: document.baseURI.replace(window.location.origin, '')
@@ -37,11 +34,13 @@ app = window.app =
     cleanup.push fn
   storage: require './components/storage/storage.coffee'
   permissions: require './components/permissions/permissions.coffee'
+  isMobile: require 'is-mobile'
 require('./components.coffee') app
 window.addEventListener 'popstate', -> app.setState()
 main = ->
+  document.body.className += if app.isMobile() then ' mobile' else ' web'
   try
     app.loggedIn = true if app.user = await Auth.currentAuthenticatedUser()
-    app.user.groups = jwtDecode(app.user.signInUserSession.idToken.jwtToken)["cognito:groups"]
+    app.user.groups = require('jwt-decode')(app.user.signInUserSession.idToken.jwtToken)["cognito:groups"]
   app.setState()
 main()
