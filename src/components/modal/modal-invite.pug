@@ -1,0 +1,11 @@
+.invite-user
+  h1 Invite user
+  form(onsubmit='app.inviteSubmit();return false', novalidate)
+    .form-item
+      input(type='email', name='email', email)
+    .form-item
+      select(name='group')
+        option User
+        option Admin
+    input(type='submit', value='Invite')
+    button(type='button', onclick='app.cancel()') Cancel

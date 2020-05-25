@@ -5,5 +5,5 @@
       | Logo
     | !{app.templates.nav()}
     .name
-      | #{app.user.username}
-      .icon-profile
+      | #{(app.user.attributes || app.user.challengeParam.userAttributes).email}
+      .icon-profile(onclick='app.storage.signout()')

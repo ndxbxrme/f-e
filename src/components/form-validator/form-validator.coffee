@@ -8,6 +8,8 @@ validators =
     elem.value is document.querySelector('input[name=' + elem.name.replace('Confirm', '') + ']').value
   password: (elem) ->
     /[A-Z]/.test(elem.value) and /[a-z]/.test(elem.value) and /[^0-9^a-z]/i.test(elem.value) and elem.value.length > 7
+  email: (elem) ->
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(elem.value)
 module.exports =
   validate: (event, shouldThrow) ->
     console.log 'validating', shouldThrow

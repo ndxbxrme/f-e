@@ -71,3 +71,6 @@ module.exports =
     null
   listUsers: ->
     await API.listUsers()
+  signout: ->
+    localStorage.clear()
+    window.location.reload()

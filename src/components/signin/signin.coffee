@@ -12,7 +12,7 @@ module.exports = ->
           {username, password, newPassword} = formValidator.validate null, true
         catch e
           return
-        errorMsg = document.querySelector '.signin .error'
+        errorMsg = document.querySelector '.signin .error-message'
         return errorMsg.innerText = 'Please enter a username and password.' if not (username and password)
         try
           if newPassword
@@ -25,11 +25,16 @@ module.exports = ->
             if response.challengeName is 'NEW_PASSWORD_REQUIRED'
               document.querySelector('.new').style.display = 'flex'
               document.querySelector('.newPassword').setAttribute('password', true)
+              document.querySelector('.newPassword').focus()
               document.querySelector('.newPasswordConfirm').setAttribute('confirm', true)
           else
             app.loggedIn = true
+            app.user.groups = require('jwt-decode')(app.user.signInUserSession.idToken.jwtToken)["cognito:groups"]
             app.setState()
         catch e
+          console.log 'errrorreor', e
           errorMsg.innerText = e.message or e
           app.user = null
           app.loggedIn = false
+      
+      

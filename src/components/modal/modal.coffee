@@ -5,10 +5,13 @@ document.body.appendChild holder
 module.exports =
   setContent: (content) ->
   show: (content, controller) ->
+    console.log 'modal show'
     new Promise (resolve, reject) ->
-      modalWindow = holder.querySelector '.modal-window'
+      modalWindow = document.querySelector '.modal-window'
       modalWindow.innerHTML = content
       controller? resolve, reject
-      holder.style.display = 'block'
+      document.querySelector('.modal-holder').style.display = 'block'
   hide: ->
-    holder.style.display = 'none'
+    document.querySelector('.modal-holder').style.display = 'none'
+    modalWindow = document.querySelector '.modal-window'
+    modalWindow.innerHTML = ''

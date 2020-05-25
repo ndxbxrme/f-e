@@ -1,6 +1,6 @@
 table
   each user in users
     tr
-      td= user.Username
       td= ctrl.getAttribute(user, 'email')
+      td= user.UserStatus
       td= user.Group

@@ -1,6 +1,8 @@
 mobile = require 'is-mobile'
 storage = require '../storage/storage.coffee'
 Hammer = require 'hammerjs'
+modal = require '../modal/modal.coffee'
+alert = require '../alert/alert.coffee'
 
 offset = (elm, tosel) ->
   output = left:0, top: 0, width: elm.offsetWidth, height: elm.offsetHeight
@@ -12,15 +14,22 @@ offset = (elm, tosel) ->
   output
 
 module.exports = (params) ->
-  equipment = await storage.list 'equipment'
-  data = {}
-  data.needsMaintenance = equipment.filter (item) ->
-    item.scheduleMs = item.schedule * 1000 * 60 * 60
-    item.timeLeft = item.scheduleMs - item.currentTime
-    item.currentTime > item.scheduleMs * 80 / 100
-  data.currentEvents = equipment.filter (item) ->
-    item.attachedTo
-  data.currentEvents.sort (a, b) -> if a.attachedDate > b.attachedDate then -1 else 1
+  load = ->
+    equipment = await storage.list 'equipment'
+    console.log 'eq', equipment
+    data = {}
+    data.needsMaintenance = equipment.filter (item) ->
+      item.scheduleMs = item.schedule * 1000 * 60 * 60
+      item.timeLeft = item.scheduleMs - item.currentTime
+      item.currentTime > item.scheduleMs * 80 / 100
+    data.currentEvents = equipment.filter (item) ->
+      item.attachedTo
+    data.currentEvents.sort (a, b) -> if a.attachedDate > b.attachedDate then -1 else 1
+    if mobile()
+      document.querySelector('.dashboard .table').innerHTML = require('./table-mobile.pug') data 
+    else
+      document.querySelector('.dashboard .table').innerHTML = require('./table.pug') data
+  await load()
   mc = new Hammer document.querySelector('.dashboard .table')
   mc.on 'swipeleft swiperight', (ev) ->
     #return if ev.deltaX < -180
@@ -34,19 +43,23 @@ module.exports = (params) ->
         elm.className += ' panned'
         break
       elm = elm.parentElement
-  app.deleteEvent = (fpe) ->
-    shouldDelete = await modal.show require('../modal/modal-delete.pug')(equipment), (resolve) ->
+  app.deleteEvent = (id) ->
+    [myequipment] = equipment.filter (item) -> item.id is id
+    shouldDelete = await modal.show require('../modal/modal-delete-event.pug')(myequipment), (resolve) ->
       app.ok = -> resolve true
       app.cancel = -> resolve false
     modal.hide()
     if shouldDelete
-      result = await storage.delete 'equipment/' + fpe
-      app.goto ''
+      fpe = '0-' + myequipment.attachedTo.id + '-' + myequipment.id
+      result = await storage.delete 'events/' + fpe
+      alert.show 'Event deleted'
+      load()
   app.signIn = (id) ->
     [myequipment] = equipment.filter (item) -> item.id is id
-    console.log myequipment
-  return document.querySelector('.dashboard .table').innerHTML = require('./table-mobile.pug') data if mobile()
-  document.querySelector('.dashboard .table').innerHTML = require('./table.pug') data
+    myequipment.type = 'equipment'
+    await storage.addToDatabase myequipment, myequipment.attachedTo
+    alert.show 'Equipment signed in'
+    load()
   ###
   {body} = await API.get 'FarmAPI', '/equipment'
   equipment = JSON.parse body

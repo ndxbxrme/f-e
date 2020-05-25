@@ -5,6 +5,7 @@ module.exports = (params) ->
     people = await storage.list 'people'
     tableElm = document.querySelector '.people table'
     tableElm.innerHTML = require('./table.pug') items:people
+    console.log 'perople', people
     app.search = (term) ->
       tableElm.innerHTML = require('./table.pug') items:people.filter (person) ->
         person.name.toLowerCase().includes term.toLowerCase()

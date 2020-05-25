@@ -1,6 +1,7 @@
 .users
   | !{app.templates.header({page:'Users'})}
   .body
+    button(onclick='app.invite()') Invite user
     .table
   if app.isMobile()
     .footer !{app.templates.nav()}

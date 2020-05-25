@@ -1,0 +1,21 @@
+.web
+  .people
+    tbody
+      display grid
+      grid-gap 1em
+      font-size .9em
+      grid-template-columns 1fr 1fr 1fr
+      @media screen and (max-width 50em)
+        grid-template-columns 1fr 1fr
+      @media screen and (max-width 40em)
+        grid-template-columns 1fr
+      tr
+        td
+          .name
+            font-weight 400
+          .icon
+            display inline-flex
+            margin-right .2em
+          .attached
+            display flex
+            font-size .8em

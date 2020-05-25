@@ -5,7 +5,6 @@ window.msToHms = require 'ms-to-hms'
 window.msToHm = (time) -> window.msToHms(time).replace(/:\d+$/, '').replace(':', '<sub>h</sub>') + '<sub>m</sub>'
 
 cleanup = []
-page = document.querySelector '.page'
 app = window.app =
   baseURI: document.baseURI.replace(window.location.origin, '')
   useHash: /\.html/.test document.baseURI
@@ -19,7 +18,7 @@ app = window.app =
     [@route, @params] = @permissions.check @route, @params, app.user
     template = @templates[@route] or @templates.dashboard
     controller = @controllers[@route] or @controllers.dashboard
-    page.innerHTML = template app: @, ctrl: controller? @params
+    document.querySelector('.page').innerHTML = template app: @, ctrl: controller? @params
     await controller.onload?()
     require('./components/scroller/scroller.coffee').register '.body'
     document.body.className = document.body.className.replace(/ *loading/g, '') + ' loaded'
