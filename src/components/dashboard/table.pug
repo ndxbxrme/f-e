@@ -4,9 +4,9 @@ h2 Needing maintenance
 table
   each item in needsMaintenance
     tr(onclick='app.goto("equipment/' + item.id + '")')
-      td
+      td.shrink
         img(src=app.thumbnail(item.image, 50))
-      td.half
+      td
         .equipment-details
           .name= item.name
           | !{app.schedule.boxTemplate(item)}

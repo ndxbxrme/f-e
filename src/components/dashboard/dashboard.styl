@@ -1,0 +1,90 @@
+.web
+  .dashboard
+    .currentEvents
+      position relative
+      .event-holder
+        position relative
+        .myevent
+          display flex
+          background white
+          padding .5em
+          font-size .8em
+          margin-bottom .4em
+          z-index 3
+          transition transform 0.2s
+          position relative
+          .img
+            margin 0 .5em
+          .date
+            width 6em
+            text-align center
+          .day
+            display flex
+            align-items baseline
+            justify-content center
+            .num
+              font-size 1.3em
+              font-weight bold
+              margin-left .1em
+          .myequipment, .myperson
+            display flex
+            flex 1
+          &.panned
+            transform translateX(-11.3em)
+        .controls
+          z-index 1
+          position absolute
+          top 0
+          right 0
+          height 100%
+          color white
+          display flex
+          justify-content flex-end
+          .button-holder
+            display flex
+            width 9em
+            padding .4em 0
+            button
+              flex 1
+    .table
+      height 100%
+      display flex
+      flex-direction column
+      flex-wrap wrap
+      position relative
+      .sq
+        width 50%
+        height 50%
+        position relative
+      table
+        z-index 2
+        tr
+          .day
+            display flex
+            align-items baseline
+            justify-content center
+            margin-bottom .2em
+            .dayname
+              font-size .8em
+            .num
+              font-size 1.3em
+              font-weight bold
+              margin-left .1em
+          .time
+            font-weight bold
+          .equipment-details
+            display flex
+            flex-direction column
+            justify-content space-between
+            height calc(100% - .2em)
+          .month-year
+            background none
+            font-size .8em
+            font-weight bold
+            border-bottom none
+          td
+            background white
+            padding .5em
+        .name
+          font-size 0.8em
+      
