@@ -1,11 +1,5 @@
 each item in items
   tr
-    td.noborder(colspan=4)
-      .date-time
-        .started= app.dateFormat.dateTime(item.started)
-        .finished= app.dateFormat.dateTime(item.finished)
-        h3.time !{(item.time?msToHm(item.time):'')}
-  tr
     td 
       img(src=app.thumbnail(item.person.image, 60))
     td.name= item.person.name
@@ -13,3 +7,13 @@ each item in items
       img(src=app.thumbnail(item.equipment.image, 60))
     td 
       .name= item.equipment.name
+    td
+      .started
+        label From
+        | #{app.dateFormat.dateTime(item.started)}
+      .finished
+        label To
+        | #{app.dateFormat.dateTime(item.finished)}
+      .total
+        label Total time
+        span !{(item.time?msToHm(item.time):'')}

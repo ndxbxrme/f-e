@@ -4,8 +4,15 @@
       position relative
       .event-holder
         position relative
+        display flex
+        justify-content space-between
+        padding .5em
+        border-radius .4em
+        border 1px solid #ddd
+        margin .5em 0
         .myevent
           display flex
+          flex 1
           background white
           padding .5em
           font-size .8em
@@ -33,10 +40,6 @@
             transform translateX(-11.3em)
         .controls
           z-index 1
-          position absolute
-          top 0
-          right 0
-          height 100%
           color white
           display flex
           justify-content flex-end

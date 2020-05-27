@@ -39,5 +39,5 @@ h2 Currently signed out
       .controls
         .button-holder
           button(onclick='app.signIn("' + item.id + '")') Sign in
-          if !app.permissions.isAdmin()
+          if app.permissions.isAdmin()
             button(onclick='app.deleteEvent("' + item.id + '")') Delete
