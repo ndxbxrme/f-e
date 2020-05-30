@@ -8,7 +8,7 @@ module.exports = (params) ->
     codeReader = new BrowserQRCodeReader()
     app.current = app.current or {}
     redirect = 'scan'
-    if /AppleWebKit/.test navigator.userAgent
+    if window.webkit and /AppleWebKit/.test navigator.userAgent
       #ios stuff
       app.onCleanup ->
         window.webkit.messageHandlers.cameraHandler.postMessage({operation: "stop"})
@@ -34,10 +34,11 @@ module.exports = (params) ->
     else
       try
         result = await codeReader.decodeOnceFromVideoDevice undefined, 'video'
-        result = JSON.parse result
-        await codeReader.stopStreams()
-        document.querySelector('#video').stop()
+        #result = JSON.parse result
+        #await codeReader.stopStreams()
+        #document.querySelector('#video').stop()
       catch e
+        console.log 'crashin'
         document.querySelector('.page').innerHTML = JSON.stringify e
         return
     if result

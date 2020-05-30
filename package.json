@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --host 0.0.0.0",
+    "start": "webpack-dev-server --host 0.0.0.0 --https",
     "test": "coffee -o test test && nodeunit test/test.js",
     "build": "rm -rf dist && webpack --config webpack.prod.js",
     "deploy": "node deploy.js && rm -rf dist/*.map && aws s3 rm s3://www.rainstormweb.com/farm --recursive && aws s3 sync dist s3://www.rainstormweb.com/farm",
