@@ -29,7 +29,7 @@
     "local-web-server": "^4.0.0",
     "node-fetch": "^2.6.0",
     "nodeunit": "^0.11.3",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "pug-loader": "^2.4.0",
     "puppeteer": "^3.0.0",
     "puppeteer-recorder": "^1.0.7",
